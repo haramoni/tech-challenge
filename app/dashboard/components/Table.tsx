@@ -1,21 +1,14 @@
 import { Transaction } from "@/app/_types/transactionTypes";
-import { getIcon } from "@/app/utils/utils";
+import { formatCurrency, getIcon } from "@/app/utils/utils";
 import { Pencil, Trash2 } from "lucide-react";
-import { ReactNode } from "react";
 
 interface TableProps {
   transactions: Transaction[];
-  formatCurrency: (value: number) => ReactNode;
   handleEdit: (id: Transaction) => void;
   handleDelete: (e: Transaction) => void;
 }
 
-export function Table({
-  transactions,
-  formatCurrency,
-  handleEdit,
-  handleDelete,
-}: TableProps) {
+export function Table({ transactions, handleEdit, handleDelete }: TableProps) {
   return (
     <table className="w-full border-collapse">
       <thead className="hidden md:table-header-group">

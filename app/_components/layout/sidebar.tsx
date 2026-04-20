@@ -9,7 +9,7 @@ export function Sidebar() {
   const { handleLogout } = useAuth();
 
   return (
-    <aside className="hidden md:flex flex-col w-[280px] bg-surface border-r border-outline/30 sticky top-0 h-screen p-6 z-20 transition-colors duration-300">
+    <aside className="hidden md:flex flex-col w-70 bg-surface border-r border-outline/30 sticky top-0 h-screen p-6 z-20 transition-colors duration-300">
       <div className="mb-12">
         <h1 className="text-brand font-bold text-2xl uppercase tracking-wider leading-tight">
           The Digital
