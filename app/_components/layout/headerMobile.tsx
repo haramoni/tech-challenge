@@ -2,9 +2,14 @@
 
 import { useTheme } from "@/app/theme/themeProvider";
 import { Bell, Menu, Moon, Sun, User } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export function HeaderMobile() {
   const { toggleTheme, theme } = useTheme();
+  const pathname = usePathname();
+
+  if (pathname === "/") return null;
+
   return (
     <header className="md:hidden flex items-center justify-between p-6 bg-background sticky top-0 z-20 transition-colors duration-300">
       <div className="flex items-center gap-4">

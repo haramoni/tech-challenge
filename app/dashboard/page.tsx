@@ -63,7 +63,7 @@ export default function DashboardPage() {
         `/api/transactions/${selectedTransaction.id}`,
         {
           method: "DELETE",
-        },
+        }
       );
 
       if (!response.ok) {
@@ -71,7 +71,7 @@ export default function DashboardPage() {
       }
 
       setTransactions((prev) =>
-        prev.filter((tx) => tx.id !== selectedTransaction.id),
+        prev.filter((tx) => tx.id !== selectedTransaction.id)
       );
       setSelectedTransaction(null);
       setIsDeleteModalOpen(false);
@@ -81,8 +81,13 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col md:flex-row font-sans transition-colors duration-300">
-      <main className="flex-1 w-full max-w-350 mx-auto px-5 py-6 md:px-8 md:py-10 xl:px-12 xl:py-12 relative">
+    <main className="flex-1 w-full min-h-screen relative overflow-y-auto bg-background transition-colors duration-300">
+      
+      {/* O SEGREDO DO ALINHAMENTO DO FIGMA */}
+      {/* max-w-[1440px] permite que o dashboard respire em telas grandes. */}
+      {/* px-6 md:px-12 xl:px-16 garante o espaçamento lateral idêntico à imagem. */}
+      <div className="w-full max-w-[1440px] mx-auto px-6 py-8 md:px-12 md:py-12 xl:px-16">
+        
         <DashboardHeader onCreate={handleCreate} />
 
         <SummaryCards isLoading={isLoading} transactions={transactions} />
@@ -93,6 +98,7 @@ export default function DashboardPage() {
           onDelete={handleDelete}
         />
 
+        {/* Botão FAB Mobile */}
         <div className="md:hidden fixed bottom-6 left-6 right-6 z-30">
           <button
             onClick={handleCreate}
@@ -104,7 +110,7 @@ export default function DashboardPage() {
         </div>
 
         <div className="h-24 md:hidden" />
-      </main>
+      </div>
 
       {isModalOpen && (
         <TransactionModal
@@ -124,6 +130,6 @@ export default function DashboardPage() {
           }}
         />
       )}
-    </div>
+    </main>
   );
 }

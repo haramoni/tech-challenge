@@ -4,7 +4,7 @@ import { ReactNode, createContext, useContext, useMemo } from "react";
 import { useRouter } from "next/navigation";
 
 type AuthContextData = {
-  handleLogin: (email: string, password: string) => void;
+  handleLogin: (email: string, password: string) => boolean;
   handleLogout: () => void;
 };
 
@@ -23,7 +23,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (email === "admin@vault.com" && password === "admin123") {
       document.cookie = `auth_token=true; path=/; max-age=${60 * 60 * 24}`;
       router.push("/dashboard");
+      return true;
     }
+    return false;
   };
 
   const value = useMemo(

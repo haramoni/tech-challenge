@@ -2,11 +2,16 @@
 import { useAuth } from "@/app/auth/authProvider";
 import { useTheme } from "@/app/theme/themeProvider";
 import { Home, LogOut, Moon, Sun, User } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export function Sidebar() {
   const { toggleTheme, theme } = useTheme();
   console.log(theme);
   const { handleLogout } = useAuth();
+  const pathname = usePathname();
+
+  // Se estiver na página de login (raiz), não renderiza a sidebar
+  if (pathname === "/") return null;
 
   return (
     <aside className="hidden md:flex flex-col w-70 bg-surface border-r border-outline/30 sticky top-0 h-screen p-6 z-20 transition-colors duration-300">

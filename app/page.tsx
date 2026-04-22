@@ -20,8 +20,7 @@ export default function LoginPage() {
   const [error, setError] = useState(false);
 
   return (
-    // Removido o justify-center daqui para controlar o layout em blocos
-    <main className="min-h-screen flex flex-col relative overflow-hidden bg-background font-sans">
+    <main className="min-h-screen w-full flex-1 flex items-center justify-center relative overflow-hidden bg-background font-sans">
       {/* Efeito de brilho sutil ao fundo */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-brand/5 blur-[120px] rounded-full pointer-events-none"
@@ -29,7 +28,7 @@ export default function LoginPage() {
       />
 
       {/* WRAPPER CENTRAL: Isso garante a centralização perfeita do conteúdo principal */}
-      <div className="flex-1 flex flex-col items-center justify-center w-full px-6 py-12 z-10">
+      <div className="w-full flex flex-col items-center justify-center px-6 py-12 z-10">
         {/* Header / Brand */}
         {/* Adicionado w-full e text-center para forçar o alinhamento do texto */}
         <header className="w-full flex flex-col items-center justify-center text-center mb-8">
@@ -55,7 +54,11 @@ export default function LoginPage() {
             <p className="text-muted text-sm">Acesse sua conta financeira</p>
           </div>
 
-          <form className="space-y-5" onSubmit={(e) => console.log(e)}>
+          <form className="space-y-5" onSubmit={(e) => {
+            e.preventDefault(); // Evita que a página recarregue
+            const success = handleLogin(email, password);
+            setError(!success); // Se o sucesso for falso, exibe o erro
+          }}>
             {/* Input: E-mail */}
             <div className="space-y-2">
               <label
@@ -145,7 +148,7 @@ export default function LoginPage() {
       </div>
 
       {/* Footer / Trust Badges - Agora ele não interfere mais no centro da tela */}
-      <footer className="w-full p-6 text-xs text-muted font-medium uppercase tracking-wider z-10 bg-background/50 backdrop-blur-sm">
+      <footer className="absolute bottom-0 w-full p-6 text-xs text-muted font-medium uppercase tracking-wider z-10 bg-background/50 backdrop-blur-sm">
         {/* Mobile Footer */}
         <div className="flex justify-between w-full max-w-[420px] mx-auto md:hidden">
           <div className="flex items-center gap-2">
