@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, createContext, useContext, useMemo } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 
 type AuthContextData = {
   handleLogin: (email: string, password: string) => void;
