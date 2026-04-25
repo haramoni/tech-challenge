@@ -2,16 +2,18 @@
 
 import { useState, useEffect } from "react";
 import { Plus } from "lucide-react";
-import { Transaction } from "../_types/transactionTypes";
+import { Transaction } from "@/app/_types/transactionTypes";
 import {
   DashboardHeader,
   DeleteTransactionModal,
   SummaryCards,
   TransactionModal,
   TransactionsSection,
-} from "./components";
+} from "@/app/dashboard/components";
+import { useTranslations } from "next-intl";
 
 export default function DashboardPage() {
+  const t = useTranslations("dashboard");
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -25,7 +27,7 @@ export default function DashboardPage() {
         const response = await fetch("/api/transactions");
 
         if (!response.ok) {
-          throw new Error("Erro ao buscar transações");
+          throw new Error(t("fetchError"));
         }
 
         const result = await response.json();
@@ -61,13 +63,11 @@ export default function DashboardPage() {
     try {
       const response = await fetch(
         `/api/transactions/${selectedTransaction.id}`,
-        {
-          method: "DELETE",
-        },
+        { method: "DELETE" },
       );
 
       if (!response.ok) {
-        throw new Error("Erro ao excluir transação");
+        throw new Error(t("deleteError"));
       }
 
       setTransactions((prev) =>
@@ -99,7 +99,7 @@ export default function DashboardPage() {
             className="w-full bg-brand hover:bg-brand-hover text-background font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-[0_8px_30px_rgb(56,162,141,0.3)] transition-colors"
           >
             <Plus className="w-6 h-6" />
-            Nova Transação
+            {t("newTransaction")}
           </button>
         </div>
 
