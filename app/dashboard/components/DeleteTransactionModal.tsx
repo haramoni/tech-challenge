@@ -2,6 +2,7 @@
 
 import { X, TriangleAlert } from "lucide-react";
 import { Transaction } from "../../_types/transactionTypes";
+import { useTranslations } from "next-intl";
 
 interface DeleteTransactionModalProps {
   transaction: Transaction;
@@ -14,6 +15,8 @@ export function DeleteTransactionModal({
   onConfirm,
   onClose,
 }: DeleteTransactionModalProps) {
+  const t = useTranslations("deleteModal");
+
   return (
     <div
       className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
@@ -36,17 +39,17 @@ export function DeleteTransactionModal({
 
           <div>
             <h2 className="text-xl font-bold text-foreground transition-colors duration-300">
-              Excluir transação
+              {t("title")}
             </h2>
             <p className="text-sm text-muted mt-1 transition-colors duration-300">
-              Essa ação não poderá ser desfeita.
+              {t("irreversible")}
             </p>
           </div>
         </div>
 
         <div className="bg-input/60 rounded-xl p-4 mb-6 transition-colors duration-300">
           <p className="text-sm text-muted transition-colors duration-300">
-            Você está prestes a excluir:
+            {t("aboutToDelete")}
           </p>
           <p className="text-base font-semibold text-foreground mt-1 transition-colors duration-300">
             {transaction.title}
@@ -62,7 +65,7 @@ export function DeleteTransactionModal({
             onClick={onClose}
             className="flex-1 border border-outline rounded-xl py-3 font-semibold text-foreground hover:bg-input transition-colors duration-300"
           >
-            Cancelar
+            {t("cancel")}
           </button>
 
           <button
@@ -70,7 +73,7 @@ export function DeleteTransactionModal({
             onClick={onConfirm}
             className="flex-1 bg-red-500 hover:bg-red-600 text-white rounded-xl py-3 font-semibold transition-colors duration-300"
           >
-            Excluir
+            {t("confirm")}
           </button>
         </div>
       </div>

@@ -1,6 +1,9 @@
+"use client";
+
 import { Transaction } from "@/app/_types/transactionTypes";
-import { formatCurrency, getIcon } from "@/app/utils/utils";
+import { getIcon } from "@/app/utils/utils";
 import { Pencil, Trash2 } from "lucide-react";
+import { useTranslations, useFormatter } from "next-intl";
 
 interface TableProps {
   transactions: Transaction[];
@@ -9,14 +12,21 @@ interface TableProps {
 }
 
 export function Table({ transactions, handleEdit, handleDelete }: TableProps) {
+  const t = useTranslations("table");
+  const format = useFormatter();
+
+  function formatCurrency(value: number) {
+    return format.number(value, { style: "currency", currency: "BRL" });
+  }
+
   return (
     <table className="w-full border-collapse">
       <thead className="hidden md:table-header-group">
         <tr className="text-xs font-semibold text-muted uppercase tracking-wider transition-colors duration-300 border-b border-outline/20">
-          <th className="px-8 py-4 text-left">Descrição</th>
-          <th className="px-8 py-4 text-right">Valor</th>
-          <th className="px-8 py-4 text-right">Data</th>
-          <th className="px-8 py-4 text-right">Config</th>
+          <th className="px-8 py-4 text-left">{t("description")}</th>
+          <th className="px-8 py-4 text-right">{t("amount")}</th>
+          <th className="px-8 py-4 text-right">{t("date")}</th>
+          <th className="px-8 py-4 text-right">{t("config")}</th>
         </tr>
       </thead>
 

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { Transaction } from "../../_types/transactionTypes";
+import { useTranslations } from "next-intl";
 
 interface TransactionModalProps {
   transaction: Transaction | null;
@@ -11,13 +12,13 @@ interface TransactionModalProps {
 }
 
 const categoryOptions = [
-  { value: "Alimentação", iconName: "utensils" },
-  { value: "Compras", iconName: "shopping" },
-  { value: "Trabalho", iconName: "briefcase" },
-  { value: "Moradia", iconName: "building" },
-  { value: "Investimentos", iconName: "trending" },
-  { value: "Contas", iconName: "zap" },
-];
+  { value: "Alimentação", iconName: "utensils", labelKey: "categoryFood" },
+  { value: "Compras", iconName: "shopping", labelKey: "categoryShopping" },
+  { value: "Trabalho", iconName: "briefcase", labelKey: "categoryWork" },
+  { value: "Moradia", iconName: "building", labelKey: "categoryHousing" },
+  { value: "Investimentos", iconName: "trending", labelKey: "categoryInvestments" },
+  { value: "Contas", iconName: "zap", labelKey: "categoryBills" },
+] as const;
 
 function createEmptyTransaction(): Transaction {
   return {
@@ -36,6 +37,7 @@ export function TransactionModal({
   setTransactions,
   setIsModalOpen,
 }: TransactionModalProps) {
+  const t = useTranslations("transactionModal");
   const [transactionData, setTransactionData] = useState<Transaction>(
     createEmptyTransaction(),
   );
@@ -47,7 +49,6 @@ export function TransactionModal({
       setTransactionData(transaction);
       return;
     }
-
     setTransactionData(createEmptyTransaction());
   }, [transaction]);
 
@@ -61,16 +62,12 @@ export function TransactionModal({
 
       const response = await fetch(url, {
         method,
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(transactionData),
       });
 
       if (!response.ok) {
-        throw new Error(
-          isEditing ? "Erro ao editar transação" : "Erro ao salvar transação",
-        );
+        throw new Error(isEditing ? t("editError") : t("saveError"));
       }
 
       const result = await response.json();
@@ -105,7 +102,7 @@ export function TransactionModal({
         </button>
 
         <h2 className="text-xl font-bold mb-6 text-foreground transition-colors duration-300">
-          {isEditing ? "Editar Transação" : "Adicionar Transação"}
+          {isEditing ? t("editTitle") : t("addTitle")}
         </h2>
 
         <form
@@ -117,27 +114,24 @@ export function TransactionModal({
         >
           <div>
             <label className="text-sm font-medium text-foreground mb-1 block">
-              Título
+              {t("titleLabel")}
             </label>
             <input
               required
               value={transactionData.title}
               onChange={(e) =>
-                setTransactionData((prev) => ({
-                  ...prev,
-                  title: e.target.value,
-                }))
+                setTransactionData((prev) => ({ ...prev, title: e.target.value }))
               }
               type="text"
               className="w-full bg-input border border-outline rounded-lg py-2.5 px-4 text-foreground outline-none"
-              placeholder="Ex: Conta de Luz"
+              placeholder={t("titlePlaceholder")}
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-medium text-foreground mb-1 block">
-                Valor (R$)
+                {t("amountLabel")}
               </label>
               <input
                 required
@@ -157,7 +151,7 @@ export function TransactionModal({
 
             <div>
               <label className="text-sm font-medium text-foreground mb-1 block">
-                Tipo
+                {t("typeLabel")}
               </label>
               <select
                 value={transactionData.type}
@@ -169,36 +163,35 @@ export function TransactionModal({
                 }
                 className="w-full bg-input border border-outline rounded-lg py-2.5 px-4 text-foreground outline-none"
               >
-                <option value="out">Saída</option>
-                <option value="in">Entrada</option>
+                <option value="out">{t("typeOut")}</option>
+                <option value="in">{t("typeIn")}</option>
               </select>
             </div>
           </div>
 
           <div>
             <label className="text-sm font-medium text-foreground mb-1 block">
-              Categoria
+              {t("categoryLabel")}
             </label>
             <select
               required
               value={transactionData.category}
               onChange={(e) => {
-                const selectedCategory = categoryOptions.find(
+                const selected = categoryOptions.find(
                   (item) => item.value === e.target.value,
                 );
-
                 setTransactionData((prev) => ({
                   ...prev,
                   category: e.target.value,
-                  iconName: selectedCategory?.iconName ?? "",
+                  iconName: selected?.iconName ?? "",
                 }));
               }}
               className="w-full bg-input border border-outline rounded-lg py-2.5 px-4 text-foreground outline-none"
             >
-              <option value="">Selecione uma categoria</option>
+              <option value="">{t("categoryPlaceholder")}</option>
               {categoryOptions.map((item) => (
                 <option key={item.value} value={item.value}>
-                  {item.value}
+                  {t(item.labelKey)}
                 </option>
               ))}
             </select>
@@ -208,7 +201,7 @@ export function TransactionModal({
             type="submit"
             className="w-full mt-2 bg-brand hover:bg-brand-hover text-background font-bold py-3 rounded-xl transition-colors"
           >
-            {isEditing ? "Salvar Alterações" : "Salvar Registro"}
+            {isEditing ? t("saveEdit") : t("saveNew")}
           </button>
         </form>
       </div>
