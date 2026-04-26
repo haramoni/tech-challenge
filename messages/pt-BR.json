@@ -1,0 +1,100 @@
+{
+  "layout": {
+    "appName": "The Digital Vault",
+    "appNameMobile": "Santuário Financeiro"
+  },
+  "header": {
+    "menuAriaLabel": "Menu",
+    "toggleThemeAriaLabel": "Alternar Tema"
+  },
+  "sidebar": {
+    "home": "Início",
+    "logout": "Sair",
+    "myAccount": "Minha Conta"
+  },
+  "login": {
+    "financialManagement": "Gestão Financeira",
+    "welcomeBack": "Bem-vindo de volta",
+    "accessYourAccount": "Acesse sua conta financeira",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "seu@email.com",
+    "passwordLabel": "Senha",
+    "forgotPassword": "Esqueceu a senha?",
+    "invalidCredentials": "Credenciais inválidas. Use admin@vault.com / admin123",
+    "submitMobile": "Acessar Conta",
+    "submitDesktop": "Entrar no Site",
+    "noAccount": "Não possui uma conta?",
+    "createNow": "Criar agora",
+    "securityBadge": "Segurança Bancária",
+    "encryptionBadge": "Criptografia Ponta-a-Ponta",
+    "footer": "SEGURANÇA E PRIVACIDADE • © {year} THE DIGITAL VAULT"
+  },
+  "dashboard": {
+    "overview": "Visão Geral",
+    "welcomeSubtitle": "Bem-vindo de volta à sua curadoria de capital.",
+    "newTransaction": "Nova Transação",
+    "fetchError": "Erro ao buscar transações",
+    "deleteError": "Erro ao excluir transação"
+  },
+  "summaryCards": {
+    "availableBalanceMobile": "Saldo Disponível",
+    "totalBalanceDesktop": "Saldo Total",
+    "loading": "Carregando...",
+    "monthlyGrowth": "+ 2,4% este mês",
+    "incomesThisMonth": "Entradas (Mês)",
+    "expensesThisMonth": "Saídas (Mês)"
+  },
+  "table": {
+    "description": "Descrição",
+    "amount": "Valor",
+    "date": "Data",
+    "config": "Config"
+  },
+  "transactions": {
+    "recentMobile": "Transações Recentes",
+    "latestDesktop": "Últimas Transações"
+  },
+  "transactionModal": {
+    "addTitle": "Adicionar Transação",
+    "editTitle": "Editar Transação",
+    "titleLabel": "Título",
+    "titlePlaceholder": "Ex: Conta de Luz",
+    "amountLabel": "Valor (R$)",
+    "typeLabel": "Tipo",
+    "typeOut": "Saída",
+    "typeIn": "Entrada",
+    "categoryLabel": "Categoria",
+    "categoryPlaceholder": "Selecione uma categoria",
+    "categoryFood": "Alimentação",
+    "categoryShopping": "Compras",
+    "categoryWork": "Trabalho",
+    "categoryHousing": "Moradia",
+    "categoryInvestments": "Investimentos",
+    "categoryBills": "Contas",
+    "saveNew": "Salvar Registro",
+    "saveEdit": "Salvar Alterações",
+    "saveError": "Erro ao salvar transação",
+    "editError": "Erro ao editar transação"
+  },
+  "deleteModal": {
+    "title": "Excluir transação",
+    "irreversible": "Essa ação não poderá ser desfeita.",
+    "aboutToDelete": "Você está prestes a excluir:",
+    "cancel": "Cancelar",
+    "confirm": "Excluir"
+  },
+  "toast": {
+    "createSuccess": "Transação criada com sucesso!",
+    "editSuccess": "Transação atualizada com sucesso!",
+    "deleteSuccess": "Transação excluída com sucesso!",
+    "fetchError": "Erro ao buscar transações",
+    "saveError": "Erro ao salvar transação",
+    "editError": "Erro ao editar transação",
+    "deleteError": "Erro ao excluir transação"
+  },
+  "localeSwitcher": {
+    "label": "Idioma",
+    "ptBR": "Português",
+    "en": "English"
+  }
+}

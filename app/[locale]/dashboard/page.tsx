@@ -1,17 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { Plus } from "lucide-react";
-import { Transaction } from "../_types/transactionTypes";
+import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+
+import { Transaction } from "@/app/_types/transactionTypes";
 import {
   DashboardHeader,
   DeleteTransactionModal,
   SummaryCards,
   TransactionModal,
   TransactionsSection,
-} from "./components";
+} from "@/app/dashboard/components";
 
 export default function DashboardPage() {
+  const t = useTranslations("dashboard");
+  const tToast = useTranslations("toast");
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -25,20 +30,21 @@ export default function DashboardPage() {
         const response = await fetch("/api/transactions");
 
         if (!response.ok) {
-          throw new Error("Erro ao buscar transações");
+          throw new Error(t("fetchError"));
         }
 
         const result = await response.json();
         setTransactions(result.data ?? []);
       } catch (error) {
         console.error(error);
+        toast.error(tToast("fetchError"));
       } finally {
         setIsLoading(false);
       }
     }
 
     loadTransactions();
-  }, []);
+  }, [t, tToast]);
 
   function handleCreate() {
     setSelectedTransaction(null);
@@ -61,13 +67,11 @@ export default function DashboardPage() {
     try {
       const response = await fetch(
         `/api/transactions/${selectedTransaction.id}`,
-        {
-          method: "DELETE",
-        },
+        { method: "DELETE" },
       );
 
       if (!response.ok) {
-        throw new Error("Erro ao excluir transação");
+        throw new Error(t("deleteError"));
       }
 
       setTransactions((prev) =>
@@ -75,14 +79,16 @@ export default function DashboardPage() {
       );
       setSelectedTransaction(null);
       setIsDeleteModalOpen(false);
+      toast.success(tToast("deleteSuccess"));
     } catch (error) {
       console.error(error);
+      toast.error(tToast("deleteError"));
     }
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col md:flex-row font-sans transition-colors duration-300">
-      <main className="flex-1 w-full max-w-350 mx-auto px-5 py-6 md:px-8 md:py-10 xl:px-12 xl:py-12 relative">
+    <div className="bg-background flex min-h-screen w-full flex-col font-sans transition-colors duration-300 md:flex-row">
+      <main className="relative mx-auto w-full max-w-350 flex-1 px-5 py-6 md:px-8 md:py-10 xl:px-12 xl:py-12">
         <DashboardHeader onCreate={handleCreate} />
 
         <SummaryCards isLoading={isLoading} transactions={transactions} />
@@ -93,13 +99,13 @@ export default function DashboardPage() {
           onDelete={handleDelete}
         />
 
-        <div className="md:hidden fixed bottom-6 left-6 right-6 z-30">
+        <div className="fixed right-6 bottom-6 left-6 z-30 md:hidden">
           <button
             onClick={handleCreate}
-            className="w-full bg-brand hover:bg-brand-hover text-background font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-[0_8px_30px_rgb(56,162,141,0.3)] transition-colors"
+            className="bg-brand hover:bg-brand-hover text-background flex w-full items-center justify-center gap-2 rounded-xl py-4 font-bold shadow-[0_8px_30px_rgb(56,162,141,0.3)] transition-colors"
           >
-            <Plus className="w-6 h-6" />
-            Nova Transação
+            <Plus className="h-6 w-6" />
+            {t("newTransaction")}
           </button>
         </div>
 
