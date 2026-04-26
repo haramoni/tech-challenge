@@ -8,6 +8,7 @@ import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { AuthProvider } from "@/app/auth/authProvider";
 import { ThemeProvider } from "@/app/theme/themeProvider";
+import { ToasterProvider } from "@/app/_components/ToasterProvider";
 import { Sidebar } from "@/app/_components/layout/sidebar";
 import { HeaderMobile } from "@/app/_components/layout/headerMobile";
 import "@/app/globals.css";
@@ -55,6 +56,7 @@ export default async function RootLayout({
               <HeaderMobile />
               <Sidebar />
               {children}
+              <ToasterProvider />
             </body>
           </AuthProvider>
         </NextIntlClientProvider>
