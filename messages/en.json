@@ -83,6 +83,15 @@
     "cancel": "Cancel",
     "confirm": "Delete"
   },
+  "toast": {
+    "createSuccess": "Transaction created successfully!",
+    "editSuccess": "Transaction updated successfully!",
+    "deleteSuccess": "Transaction deleted successfully!",
+    "fetchError": "Error fetching transactions",
+    "saveError": "Error saving transaction",
+    "editError": "Error editing transaction",
+    "deleteError": "Error deleting transaction"
+  },
   "localeSwitcher": {
     "label": "Language",
     "ptBR": "Português",

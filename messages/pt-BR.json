@@ -83,6 +83,15 @@
     "cancel": "Cancelar",
     "confirm": "Excluir"
   },
+  "toast": {
+    "createSuccess": "Transação criada com sucesso!",
+    "editSuccess": "Transação atualizada com sucesso!",
+    "deleteSuccess": "Transação excluída com sucesso!",
+    "fetchError": "Erro ao buscar transações",
+    "saveError": "Erro ao salvar transação",
+    "editError": "Erro ao editar transação",
+    "deleteError": "Erro ao excluir transação"
+  },
   "localeSwitcher": {
     "label": "Idioma",
     "ptBR": "Português",
