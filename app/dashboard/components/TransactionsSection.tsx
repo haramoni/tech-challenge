@@ -1,8 +1,9 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { Transaction } from "../../_types/transactionTypes";
 import { Table } from "./Table";
-import { useTranslations } from "next-intl";
 
 interface TransactionsSectionProps {
   transactions: Transaction[];
@@ -18,15 +19,15 @@ export function TransactionsSection({
   const t = useTranslations("transactions");
 
   return (
-    <section className="bg-transparent md:bg-surface md:border md:border-outline/30 rounded-2xl xl:rounded-3xl md:overflow-hidden transition-colors duration-300">
-      <div className="flex justify-between items-center mb-4 md:mb-0 md:px-8 md:py-7 md:border-b md:border-outline/30">
-        <h3 className="text-lg md:text-2xl font-semibold text-foreground transition-colors duration-300">
+    <section className="md:bg-surface md:border-outline/30 rounded-2xl bg-transparent transition-colors duration-300 md:overflow-hidden md:border xl:rounded-3xl">
+      <div className="md:border-outline/30 mb-4 flex items-center justify-between md:mb-0 md:border-b md:px-8 md:py-7">
+        <h3 className="text-foreground text-lg font-semibold transition-colors duration-300 md:text-2xl">
           <span className="md:hidden">{t("recentMobile")}</span>
           <span className="hidden md:inline">{t("latestDesktop")}</span>
         </h3>
       </div>
 
-      <div className="overflow-hidden bg-surface transition-colors duration-300 rounded-2xl md:rounded-none">
+      <div className="bg-surface overflow-hidden rounded-2xl transition-colors duration-300 md:rounded-none">
         <div className="overflow-x-auto">
           <Table
             transactions={transactions}

@@ -1,8 +1,9 @@
 "use client";
 
-import { useTransition } from "react";
-import { useRouter, usePathname } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
+import { useTransition } from "react";
+
+import { usePathname, useRouter } from "@/i18n/navigation";
 
 interface Props {
   locales: readonly string[];
@@ -26,7 +27,7 @@ export function LocaleSwitcherSelect({ locales, labels }: Props) {
       value={locale}
       disabled={isPending}
       onChange={(e) => onChange(e.target.value)}
-      className="bg-transparent text-xs text-muted hover:text-foreground border border-outline/50 rounded-lg px-2 py-1 cursor-pointer transition-colors"
+      className="text-muted hover:text-foreground border-outline/50 cursor-pointer rounded-lg border bg-transparent px-2 py-1 text-xs transition-colors"
     >
       {locales.map((locale) => (
         <option key={locale} value={locale}>

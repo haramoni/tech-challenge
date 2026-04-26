@@ -1,8 +1,10 @@
 "use client";
 
-import { useTheme } from "@/app/theme/themeProvider";
 import { Bell, Menu, Moon, Sun, User } from "lucide-react";
 import { useTranslations } from "next-intl";
+
+import { useTheme } from "@/app/theme/themeProvider";
+
 import { LocaleSwitcher } from "./LocaleSwitcher";
 
 export function HeaderMobile() {
@@ -11,15 +13,15 @@ export function HeaderMobile() {
   const tLayout = useTranslations("layout");
 
   return (
-    <header className="md:hidden flex items-center justify-between p-6 bg-background sticky top-0 z-20 transition-colors duration-300">
+    <header className="bg-background sticky top-0 z-20 flex items-center justify-between p-6 transition-colors duration-300 md:hidden">
       <div className="flex items-center gap-4">
         <button
           className="text-foreground hover:text-brand transition-colors"
           aria-label={t("menuAriaLabel")}
         >
-          <Menu className="w-6 h-6" />
+          <Menu className="h-6 w-6" />
         </button>
-        <span className="text-brand font-semibold text-xl tracking-tight">
+        <span className="text-brand text-xl font-semibold tracking-tight">
           {tLayout("appName")}
         </span>
       </div>
@@ -30,12 +32,12 @@ export function HeaderMobile() {
           className="text-muted hover:text-foreground transition-colors"
           aria-label={t("toggleThemeAriaLabel")}
         >
-          {theme ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          {theme ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
         </button>
 
-        <Bell className="w-5 h-5 text-muted hover:text-foreground transition-colors cursor-pointer" />
-        <div className="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center text-brand">
-          <User className="w-4 h-4" />
+        <Bell className="text-muted hover:text-foreground h-5 w-5 cursor-pointer transition-colors" />
+        <div className="bg-brand/20 text-brand flex h-8 w-8 items-center justify-center rounded-full">
+          <User className="h-4 w-4" />
         </div>
       </div>
     </header>

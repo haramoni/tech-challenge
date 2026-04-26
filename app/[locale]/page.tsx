@@ -1,18 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
 import {
-  Mail,
-  Lock,
   ArrowRight,
-  Wallet,
-  ShieldCheck,
-  LockKeyhole,
   Eye,
   EyeOff,
+  Lock,
+  LockKeyhole,
+  Mail,
+  ShieldCheck,
+  Wallet,
 } from "lucide-react";
-import { useAuth } from "@/app/auth/authProvider";
 import { useTranslations } from "next-intl";
+import React, { useState } from "react";
+
+import { useAuth } from "@/app/auth/authProvider";
 
 export default function LoginPage() {
   const { handleLogin } = useAuth();
@@ -35,29 +36,29 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col relative overflow-hidden bg-background font-sans w-full">
+    <main className="bg-background relative flex min-h-screen w-full flex-col overflow-hidden font-sans">
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-brand/5 blur-[120px] rounded-full pointer-events-none"
+        className="bg-brand/5 pointer-events-none absolute top-0 left-1/2 h-[400px] w-[600px] -translate-x-1/2 rounded-full blur-[120px]"
         aria-hidden="true"
       />
 
-      <div className="flex-1 flex flex-col items-center justify-center w-full px-6 py-12 z-10">
-        <header className="w-full flex flex-col items-center justify-center text-center mb-8">
-          <div className="w-12 h-12 bg-surface flex items-center justify-center rounded-xl mb-4 border border-outline shadow-sm md:hidden">
-            <Wallet className="text-brand w-6 h-6" />
+      <div className="z-10 flex w-full flex-1 flex-col items-center justify-center px-6 py-12">
+        <header className="mb-8 flex w-full flex-col items-center justify-center text-center">
+          <div className="bg-surface border-outline mb-4 flex h-12 w-12 items-center justify-center rounded-xl border shadow-sm md:hidden">
+            <Wallet className="text-brand h-6 w-6" />
           </div>
-          <h1 className="text-brand font-semibold text-2xl md:text-3xl tracking-tight">
+          <h1 className="text-brand text-2xl font-semibold tracking-tight md:text-3xl">
             <span className="md:hidden">{tLayout("appNameMobile")}</span>
             <span className="hidden md:inline">{tLayout("appName")}</span>
           </h1>
-          <p className="text-muted text-xs md:text-sm tracking-widest uppercase mt-2 font-medium">
+          <p className="text-muted mt-2 text-xs font-medium tracking-widest uppercase md:text-sm">
             {t("financialManagement")}
           </p>
         </header>
 
-        <section className="bg-surface w-full max-w-[420px] mx-auto rounded-2xl p-6 md:p-8 shadow-2xl border border-outline/30">
+        <section className="bg-surface border-outline/30 mx-auto w-full max-w-[420px] rounded-2xl border p-6 shadow-2xl md:p-8">
           <div className="mb-8">
-            <h2 className="text-xl md:text-2xl font-semibold mb-1 text-foreground">
+            <h2 className="text-foreground mb-1 text-xl font-semibold md:text-2xl">
               {t("welcomeBack")}
             </h2>
             <p className="text-muted text-sm">{t("accessYourAccount")}</p>
@@ -67,20 +68,20 @@ export default function LoginPage() {
             <div className="space-y-2">
               <label
                 htmlFor="email"
-                className="text-sm font-medium text-foreground"
+                className="text-foreground text-sm font-medium"
               >
                 {t("emailLabel")}
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-muted" aria-hidden="true" />
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
+                  <Mail className="text-muted h-5 w-5" aria-hidden="true" />
                 </div>
                 <input
                   id="email"
                   value={email}
                   type="email"
                   required
-                  className="w-full bg-input border border-outline rounded-lg py-3 pl-11 pr-4 text-foreground placeholder:text-muted/60 focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all"
+                  className="bg-input border-outline text-foreground placeholder:text-muted/60 focus:ring-brand w-full rounded-lg border py-3 pr-4 pl-11 transition-all focus:border-transparent focus:ring-2 focus:outline-none"
                   placeholder={t("emailPlaceholder")}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -91,34 +92,34 @@ export default function LoginPage() {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="text-sm font-medium text-foreground"
+                  className="text-foreground text-sm font-medium"
                 >
                   {t("passwordLabel")}
                 </label>
                 <a
                   href="#"
-                  className="text-brand hover:text-brand-hover text-xs font-medium transition-colors focus:outline-none focus:underline rounded-sm focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:ring-offset-surface"
+                  className="text-brand hover:text-brand-hover focus:ring-brand focus:ring-offset-surface rounded-sm text-xs font-medium transition-colors focus:underline focus:ring-2 focus:ring-offset-2 focus:outline-none"
                 >
                   {t("forgotPassword")}
                 </a>
               </div>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-muted" aria-hidden="true" />
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
+                  <Lock className="text-muted h-5 w-5" aria-hidden="true" />
                 </div>
                 <input
                   id="password"
                   type={showPassword ? "text" : "password"}
                   value={password}
                   required
-                  className="w-full bg-input border border-outline rounded-lg py-3 pl-11 pr-11 text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent transition-all tracking-widest"
+                  className="bg-input border-outline text-foreground placeholder:text-muted/50 focus:ring-brand w-full rounded-lg border py-3 pr-11 pl-11 tracking-widest transition-all focus:border-transparent focus:ring-2 focus:outline-none"
                   placeholder="••••••••"
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-muted hover:text-foreground transition-colors"
+                  className="text-muted hover:text-foreground absolute inset-y-0 right-0 flex items-center pr-3.5 transition-colors"
                   aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
                 >
                   {showPassword ? (
@@ -138,20 +139,20 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="w-full mt-2 bg-brand hover:bg-brand-hover text-[#121413] font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:ring-offset-surface"
+              className="bg-brand hover:bg-brand-hover focus:ring-brand focus:ring-offset-surface mt-2 flex w-full items-center justify-center gap-2 rounded-lg px-4 py-3 font-semibold text-[#121413] transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
             >
               <span className="md:hidden">{t("submitMobile")}</span>
               <span className="hidden md:inline">{t("submitDesktop")}</span>
-              <ArrowRight className="w-5 h-5" aria-hidden="true" />
+              <ArrowRight className="h-5 w-5" aria-hidden="true" />
             </button>
           </form>
 
-          <div className="mt-8 pt-6 border-t border-outline/50 text-center md:hidden">
-            <p className="text-sm text-muted">
+          <div className="border-outline/50 mt-8 border-t pt-6 text-center md:hidden">
+            <p className="text-muted text-sm">
               {t("noAccount")}{" "}
               <a
                 href="#"
-                className="text-brand hover:text-brand-hover font-medium focus:outline-none focus:underline"
+                className="text-brand hover:text-brand-hover font-medium focus:underline focus:outline-none"
               >
                 {t("createNow")}
               </a>
@@ -160,19 +161,23 @@ export default function LoginPage() {
         </section>
       </div>
 
-      <footer className="w-full p-6 text-xs text-muted font-medium uppercase tracking-wider z-10 bg-background/50 backdrop-blur-sm">
-        <div className="flex justify-between w-full max-w-[420px] mx-auto md:hidden">
+      <footer className="text-muted bg-background/50 z-10 w-full p-6 text-xs font-medium tracking-wider uppercase backdrop-blur-sm">
+        <div className="mx-auto flex w-full max-w-[420px] justify-between md:hidden">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4" aria-hidden="true" />
-            <span className="text-left leading-tight">{t("securityBadge")}</span>
+            <ShieldCheck className="h-4 w-4" aria-hidden="true" />
+            <span className="text-left leading-tight">
+              {t("securityBadge")}
+            </span>
           </div>
           <div className="flex items-center gap-2">
-            <LockKeyhole className="w-4 h-4" aria-hidden="true" />
-            <span className="text-left leading-tight">{t("encryptionBadge")}</span>
+            <LockKeyhole className="h-4 w-4" aria-hidden="true" />
+            <span className="text-left leading-tight">
+              {t("encryptionBadge")}
+            </span>
           </div>
         </div>
 
-        <div className="hidden md:flex justify-center items-center">
+        <div className="hidden items-center justify-center md:flex">
           {t("footer", { year: new Date().getFullYear() })}
         </div>
       </footer>

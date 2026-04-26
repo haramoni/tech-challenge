@@ -1,17 +1,19 @@
+import "@/app/globals.css";
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import { getMessages } from "next-intl/server";
-import { routing } from "@/i18n/routing";
+
+import { HeaderMobile } from "@/app/_components/layout/headerMobile";
+import { Sidebar } from "@/app/_components/layout/sidebar";
+import { ToasterProvider } from "@/app/_components/ToasterProvider";
 import { AuthProvider } from "@/app/auth/authProvider";
 import { ThemeProvider } from "@/app/theme/themeProvider";
-import { ToasterProvider } from "@/app/_components/ToasterProvider";
-import { Sidebar } from "@/app/_components/layout/sidebar";
-import { HeaderMobile } from "@/app/_components/layout/headerMobile";
-import "@/app/globals.css";
+import { routing } from "@/i18n/routing";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

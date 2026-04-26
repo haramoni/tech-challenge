@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { X } from "lucide-react";
-import { toast } from "sonner";
-import { Transaction } from "../../_types/transactionTypes";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+
+import { Transaction } from "../../_types/transactionTypes";
 
 interface TransactionModalProps {
   transaction: Transaction | null;
@@ -17,7 +18,11 @@ const categoryOptions = [
   { value: "Compras", iconName: "shopping", labelKey: "categoryShopping" },
   { value: "Trabalho", iconName: "briefcase", labelKey: "categoryWork" },
   { value: "Moradia", iconName: "building", labelKey: "categoryHousing" },
-  { value: "Investimentos", iconName: "trending", labelKey: "categoryInvestments" },
+  {
+    value: "Investimentos",
+    iconName: "trending",
+    labelKey: "categoryInvestments",
+  },
   { value: "Contas", iconName: "zap", labelKey: "categoryBills" },
 ] as const;
 
@@ -83,7 +88,9 @@ export function TransactionModal({
           : [savedTransaction, ...prev],
       );
 
-      toast.success(isEditing ? tToast("editSuccess") : tToast("createSuccess"));
+      toast.success(
+        isEditing ? tToast("editSuccess") : tToast("createSuccess"),
+      );
       setIsModalOpen(false);
     } catch (error) {
       console.error(error);
@@ -93,19 +100,19 @@ export function TransactionModal({
 
   return (
     <div
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
       aria-modal="true"
       role="dialog"
     >
-      <div className="bg-surface w-full max-w-md rounded-2xl border border-outline/50 shadow-2xl p-6 relative transition-colors duration-300">
+      <div className="bg-surface border-outline/50 relative w-full max-w-md rounded-2xl border p-6 shadow-2xl transition-colors duration-300">
         <button
           onClick={() => setIsModalOpen(false)}
-          className="absolute top-4 right-4 text-muted hover:text-foreground transition-colors"
+          className="text-muted hover:text-foreground absolute top-4 right-4 transition-colors"
         >
-          <X className="w-6 h-6" />
+          <X className="h-6 w-6" />
         </button>
 
-        <h2 className="text-xl font-bold mb-6 text-foreground transition-colors duration-300">
+        <h2 className="text-foreground mb-6 text-xl font-bold transition-colors duration-300">
           {isEditing ? t("editTitle") : t("addTitle")}
         </h2>
 
@@ -117,24 +124,27 @@ export function TransactionModal({
           className="space-y-4"
         >
           <div>
-            <label className="text-sm font-medium text-foreground mb-1 block">
+            <label className="text-foreground mb-1 block text-sm font-medium">
               {t("titleLabel")}
             </label>
             <input
               required
               value={transactionData.title}
               onChange={(e) =>
-                setTransactionData((prev) => ({ ...prev, title: e.target.value }))
+                setTransactionData((prev) => ({
+                  ...prev,
+                  title: e.target.value,
+                }))
               }
               type="text"
-              className="w-full bg-input border border-outline rounded-lg py-2.5 px-4 text-foreground outline-none"
+              className="bg-input border-outline text-foreground w-full rounded-lg border px-4 py-2.5 outline-none"
               placeholder={t("titlePlaceholder")}
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-sm font-medium text-foreground mb-1 block">
+              <label className="text-foreground mb-1 block text-sm font-medium">
                 {t("amountLabel")}
               </label>
               <input
@@ -148,13 +158,13 @@ export function TransactionModal({
                 }
                 type="number"
                 step="0.01"
-                className="w-full bg-input border border-outline rounded-lg py-2.5 px-4 text-foreground outline-none"
+                className="bg-input border-outline text-foreground w-full rounded-lg border px-4 py-2.5 outline-none"
                 placeholder="0.00"
               />
             </div>
 
             <div>
-              <label className="text-sm font-medium text-foreground mb-1 block">
+              <label className="text-foreground mb-1 block text-sm font-medium">
                 {t("typeLabel")}
               </label>
               <select
@@ -165,7 +175,7 @@ export function TransactionModal({
                     type: e.target.value as Transaction["type"],
                   }))
                 }
-                className="w-full bg-input border border-outline rounded-lg py-2.5 px-4 text-foreground outline-none"
+                className="bg-input border-outline text-foreground w-full rounded-lg border px-4 py-2.5 outline-none"
               >
                 <option value="out">{t("typeOut")}</option>
                 <option value="in">{t("typeIn")}</option>
@@ -174,7 +184,7 @@ export function TransactionModal({
           </div>
 
           <div>
-            <label className="text-sm font-medium text-foreground mb-1 block">
+            <label className="text-foreground mb-1 block text-sm font-medium">
               {t("categoryLabel")}
             </label>
             <select
@@ -190,7 +200,7 @@ export function TransactionModal({
                   iconName: selected?.iconName ?? "",
                 }));
               }}
-              className="w-full bg-input border border-outline rounded-lg py-2.5 px-4 text-foreground outline-none"
+              className="bg-input border-outline text-foreground w-full rounded-lg border px-4 py-2.5 outline-none"
             >
               <option value="">{t("categoryPlaceholder")}</option>
               {categoryOptions.map((item) => (
@@ -203,7 +213,7 @@ export function TransactionModal({
 
           <button
             type="submit"
-            className="w-full mt-2 bg-brand hover:bg-brand-hover text-background font-bold py-3 rounded-xl transition-colors"
+            className="bg-brand hover:bg-brand-hover text-background mt-2 w-full rounded-xl py-3 font-bold transition-colors"
           >
             {isEditing ? t("saveEdit") : t("saveNew")}
           </button>

@@ -1,6 +1,7 @@
 "use client";
 
 import { Toaster } from "sonner";
+
 import { useTheme } from "@/app/theme/themeProvider";
 
 export function ToasterProvider() {
