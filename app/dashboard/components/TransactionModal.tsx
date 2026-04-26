@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
+import { toast } from "sonner";
 import { Transaction } from "../../_types/transactionTypes";
 import { useTranslations } from "next-intl";
 
@@ -38,6 +39,7 @@ export function TransactionModal({
   setIsModalOpen,
 }: TransactionModalProps) {
   const t = useTranslations("transactionModal");
+  const tToast = useTranslations("toast");
   const [transactionData, setTransactionData] = useState<Transaction>(
     createEmptyTransaction(),
   );
@@ -81,9 +83,11 @@ export function TransactionModal({
           : [savedTransaction, ...prev],
       );
 
+      toast.success(isEditing ? tToast("editSuccess") : tToast("createSuccess"));
       setIsModalOpen(false);
     } catch (error) {
       console.error(error);
+      toast.error(isEditing ? tToast("editError") : tToast("saveError"));
     }
   }
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Plus } from "lucide-react";
+import { toast } from "sonner";
 import { Transaction } from "@/app/_types/transactionTypes";
 import {
   DashboardHeader,
@@ -14,6 +15,7 @@ import { useTranslations } from "next-intl";
 
 export default function DashboardPage() {
   const t = useTranslations("dashboard");
+  const tToast = useTranslations("toast");
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -34,6 +36,7 @@ export default function DashboardPage() {
         setTransactions(result.data ?? []);
       } catch (error) {
         console.error(error);
+        toast.error(tToast("fetchError"));
       } finally {
         setIsLoading(false);
       }
@@ -75,13 +78,15 @@ export default function DashboardPage() {
       );
       setSelectedTransaction(null);
       setIsDeleteModalOpen(false);
+      toast.success(tToast("deleteSuccess"));
     } catch (error) {
       console.error(error);
+      toast.error(tToast("deleteError"));
     }
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col md:flex-row font-sans transition-colors duration-300">
+    <div className="min-h-screen bg-background flex flex-col md:flex-row font-sans transition-colors duration-300 w-full">
       <main className="flex-1 w-full max-w-350 mx-auto px-5 py-6 md:px-8 md:py-10 xl:px-12 xl:py-12 relative">
         <DashboardHeader onCreate={handleCreate} />
 

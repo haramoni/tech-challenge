@@ -32,7 +32,7 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col relative overflow-hidden bg-background font-sans">
+    <main className="min-h-screen flex flex-col relative overflow-hidden bg-background font-sans w-full">
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-brand/5 blur-[120px] rounded-full pointer-events-none"
         aria-hidden="true"
