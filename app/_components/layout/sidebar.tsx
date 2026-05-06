@@ -9,7 +9,7 @@ import { LocaleSwitcher } from "./LocaleSwitcher";
 
 export function Sidebar() {
   const { toggleTheme, theme } = useTheme();
-  const { handleLogout } = useAuth();
+  const { handleLogout, isAuthenticated } = useAuth();
   const t = useTranslations("sidebar");
   const tHeader = useTranslations("header");
 
@@ -31,13 +31,15 @@ export function Sidebar() {
           <Home className="h-5 w-5" />
           {t("home")}
         </a>
-        <button
-          onClick={handleLogout}
-          className="text-muted hover:text-foreground flex w-full items-center gap-3 rounded-lg px-4 py-3 font-medium transition-colors hover:bg-black/5 dark:hover:bg-white/5"
-        >
-          <LogOut className="h-5 w-5" />
-          {t("logout")}
-        </button>
+        {isAuthenticated && (
+          <button
+            onClick={handleLogout}
+            className="text-muted hover:text-foreground flex w-full items-center gap-3 rounded-lg px-4 py-3 font-medium transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+          >
+            <LogOut className="h-5 w-5" />
+            {t("logout")}
+          </button>
+        )}
       </nav>
 
       <div className="border-outline/30 mt-auto flex items-center justify-between border-t pt-6">
